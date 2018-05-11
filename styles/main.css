@@ -1,0 +1,91 @@
+		div.firstColoumn {
+            order:1;
+            width: 48%;
+            background-color: rgba(125, 125, 125, 0.7);
+            z-index: 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        div.secondColoumn {
+            order:2;
+            width: 48%;
+            background-color: rgba(125, 125, 125, 0.7);
+            z-index: 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+		div.main {
+            width: 98%;
+            margin: 110px auto;
+            margin-bottom: 40px;
+            z-index: 300;
+            display:flex;
+            flex-direction:row;
+            justify-content:space-between;
+            align-items:stretch;
+        }
+		div.navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+	    }
+        div.navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change background on mouse-over */
+        div.navbar a:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        label.input {
+            color: #B4886B;
+            font-weight: bold;
+            display: block;
+            width: 150px;
+            float: left;
+        }
+
+        input.centeredInput {
+            width: 90%;
+            display: block;
+            margin : 0 auto;
+        }
+
+        div.messageWrap {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: none;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            background-color: rgba(125, 125, 125, 0.7);
+            align-items: center;
+            justify-content: center;
+        }
+
+        div.message {
+            width: 500px;
+            height: auto;
+            background-color: rgb(239, 239, 186);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            vertical-align:middle;
+            display:inline-block;
+            border-radius: 15px;
+        }
+
+        label.error {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            padding:1px 20px 1px 20px;
+        }
