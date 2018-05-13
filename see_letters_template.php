@@ -49,7 +49,7 @@
             </label>
             <label style="display: block">
                 <span style="display: inline-block; width: 130px">Text :</span>
-                <textarea style="background-color: #dddddd; width:95%" id="text" name="text" rows="20" readonly>
+                <textarea class="wide_area" id="text" name="text" rows="20" readonly>
                 </textarea>
             </label>
         </div>

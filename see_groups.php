@@ -35,7 +35,7 @@
 			</div>
 			<div class="secondColoumn">
 				<h2 align="center">Group members</h2>
-				<textarea style="background-color: #dddddd; width:96%; margin:1% 1% 1% 1%; padding:1% 1% 1% 1%; overflow-y: auto" id="groupExplanationText" name="text" rows="2" readonly>
+				<textarea class="wide_area" id="groupExplanationText" name="text" rows="2" readonly>
 
 				</textarea>
 			</div>

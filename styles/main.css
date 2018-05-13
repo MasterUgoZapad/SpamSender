@@ -104,3 +104,11 @@
             overflow:hidden;
             font: 12pt consolas;
         }
+
+        textarea.wide_area{
+            margin:1% 1% 1% 1%;
+            padding:1% 1% 1% 1%;
+            overflow-y: auto;
+            background-color: #dddddd;
+            width:95%
+        }

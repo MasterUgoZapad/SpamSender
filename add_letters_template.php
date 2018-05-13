@@ -46,7 +46,7 @@
     <div class="secondColoumn">
         <h2 align="center">Available aliases</h2>
         <form style="width:auto">
-            <textarea style="background-color: #dddddd; width:96%; margin:1% 1% 1% 1%; padding:1% 1% 1% 1%; overflow-y: auto" id="aliasesText" name="text"
+            <textarea class="wide_area" id="aliasesText" name="text"
                       rows="2" readonly></textarea>
         </form>
     </div>
