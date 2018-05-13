@@ -48,14 +48,18 @@ function EditGroup(){
 function DeleteGroup(){
     var group = GetSelectedValue("GroupListSelect");
     if (CheckIfValid(group)) {
-        $.get({
-            dataType: "json",
-            data: group,
-            url: "rest/request_handler.php?action=delete_group",
-            success: function(data) {
-                RefreshGroups();
-                ApplyGroupData({}, 0, "groupExplanationText", StringifyPeople);
-            }
-        });
+        Submit(submit_delete_element, DeleteGroupByIndex, group);
     }
+}
+
+function DeleteGroupByIndex(group){
+    $.get({
+        dataType: "json",
+        data: group,
+        url: "rest/request_handler.php?action=delete_group",
+        success: function(data) {
+            RefreshGroups();
+            ApplyGroupData({}, 0, "groupExplanationText", StringifyPeople);
+        }
+    });
 }

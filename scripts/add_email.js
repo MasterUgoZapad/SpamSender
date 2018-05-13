@@ -38,6 +38,12 @@ function DeleteEmail() {
     var email = GetSelectedValue("EmailListSelect");
     if (CheckIfValid(email)) {
         var mail_index = email['m_index'];
+        Submit(submit_delete_element, DeleteEmailByIndex, mail_index);
+    }
+}
+
+function DeleteEmailByIndex(mail_index){
+    if (CheckIfValid(mail_index)) {
         $.get({
             url: 'rest/request_handler.php?action=delete_email',
             dataType: "json",

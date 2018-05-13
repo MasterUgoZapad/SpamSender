@@ -21,7 +21,7 @@ $(function () {
             origin: "Origin is required",
         },
         submitHandler: function (form) {
-            SubmitData();
+            Submit(submit_save_data,SubmitData);
         }
     });
 });

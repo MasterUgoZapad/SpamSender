@@ -8,6 +8,8 @@
     <script src="scripts/validation/jquery.validate.js"></script>
     <script src="scripts/see_letters_template.js"></script>
     <script src="scripts/common.js"></script>
+    <script src="elements/EN-errorstrings.js"></script>
+    <script src="elements/EN-strings.js"></script>
     <script>
         $(function () {$("#navbar").load("elements/navbar.html");});
         $(function () {$("#errorwrap").load("elements/errorwrap.html");});

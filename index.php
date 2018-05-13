@@ -9,6 +9,8 @@ session_start();
     <title>Spam sender</title>
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     <script src="scripts/validation/jquery.js"></script>
+    <script src="elements/EN-errorstrings.js"></script>
+    <script src="elements/EN-strings.js"></script>
     <script>
         $(function () {$("#navbar").load("elements/navbar.html");});
         $(function () {$("#errorwrap").load("elements/errorwrap.html");});

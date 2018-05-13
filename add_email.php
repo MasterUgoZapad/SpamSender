@@ -9,6 +9,8 @@
     <script src="scripts/add_email.js"></script>
     <script src="scripts/validation/add_email.js"></script>
     <script src="scripts/common.js"></script>
+    <script src="elements/EN-errorstrings.js"></script>
+    <script src="elements/EN-strings.js"></script>
     <script>
         $(function () {$("#navbar").load("elements/navbar.html");});
         $(function () {$("#errorwrap").load("elements/errorwrap.html");});

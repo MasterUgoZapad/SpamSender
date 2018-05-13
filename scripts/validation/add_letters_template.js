@@ -9,7 +9,7 @@ $(function () {
             theme: "Theme is required",
         },
         submitHandler: function (form) {
-            SubmitData();
+            Submit(submit_save_data,SubmitData);
         }
     });
 });

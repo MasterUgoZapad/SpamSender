@@ -50,9 +50,16 @@ function ApplyTemplate(){
 function DeleteTemplate(){
     var template = GetSelectedValue("TemplateListSelect");
     if (CheckIfValid(template)) {
+        var index = template['m_index'];
+        Submit(submit_delete_element, DeleteTemplateByIndex, index);
+    }
+}
+
+function DeleteTemplateByIndex(index){
+    if (CheckIfValid(index)) {
         $.get({
             dataType: "json",
-            data: {'index': template['m_index']},
+            data: {'index': index},
             url: "rest/request_handler.php?action=delete_templates",
             success: function(data) {
                 RefreshTemplates();

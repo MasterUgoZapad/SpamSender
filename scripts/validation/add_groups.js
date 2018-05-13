@@ -7,7 +7,7 @@ $(function () {
             group_name: "Name is required",
         },
         submitHandler: function (form) {
-            AddGroup();
+            Submit(submit_save_data,AddGroup);
         }
     });
 });

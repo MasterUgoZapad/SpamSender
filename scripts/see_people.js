@@ -20,19 +20,25 @@ function DeletePeople() {
     var man = GetSelectedValue("PeopleListSelect");
     if (CheckIfValid(man)) {
         var index = (man['m_index']);
-        if (CheckIfValid(index)) {
-            $.get({
-                url: 'rest/request_handler.php?action=delete_people',
-                dataType: "json",
-                data: {'index': index},
-                success: function (responce) {
-                    RefreshPeople(responce);
-                },
-                error: function (responce) {
-                    Falue(responce);
-                }
-            });
-        }
+        Submit(submit_delete_element, DeletePeopleByIndex, index);
+    }
+    else
+        Falue(error_element_not_selected);
+}
+
+function DeletePeopleByIndex(index){
+    if (CheckIfValid(index)) {
+        $.get({
+            url: 'rest/request_handler.php?action=delete_people',
+            dataType: "json",
+            data: {'index': index},
+            success: function (responce) {
+                RefreshPeople(responce);
+            },
+            error: function (responce) {
+                Falue(responce);
+            }
+        });
     }
 }
 
