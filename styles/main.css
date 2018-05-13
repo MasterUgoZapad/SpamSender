@@ -76,11 +76,18 @@
         div.message {
             width: 500px;
             height: auto;
-            background-color: rgb(239, 239, 186);
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
             vertical-align:middle;
             display:inline-block;
             border-radius: 15px;
+        }
+
+        div.message.error_message{
+            background-color: rgb(252, 189, 172);
+        }
+
+        div.message.submit_message{
+            background-color: rgb(239, 239, 186);
         }
 
         label.error {
