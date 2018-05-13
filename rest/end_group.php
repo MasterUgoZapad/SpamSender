@@ -113,4 +113,20 @@ function get_group_data_and_encode(){
     return json_encode($response);
 }
 
+function get_group_name(){
+    $group = new Group();
+    $index = $_GET['index'];
+    $connection = connect_db();
+    $proc = $connection->prepare("call SelectGroupName(?)");
+    $proc->bind_param('i',$index);
+    $proc->execute();
+    $err = $proc->error;
+    $result = $proc->get_result();
+    $row = $result->fetch_object();
+    $group->m_index = $index;
+    $group->m_name = $row->Name;
+    $proc->close();
+    return json_encode($group);
+}
+
 ?>

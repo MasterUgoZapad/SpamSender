@@ -30,6 +30,9 @@ switch ($action) {
     case 'add_group':
         $response_string = add_group();
         break;
+    case 'get_group_name':
+        $response_string = get_group_name();
+        break;
     case 'delete_group':
         $response_string = delete_group();
         break;
