@@ -10,22 +10,16 @@
     <script src="scripts/common.js"></script>
     <script src="elements/EN-errorstrings.js"></script>
     <script>
-        //include navbar
-        $(function(){
-            $("#navbar").load("elements/navbar.html");
-        });
-    </script>
-    <script>
-        //include error wrap
-        $(function(){
-            $("#errorwrap").load("elements/errorwrap.html");
-        });
+        $(function () {$("#navbar").load("elements/navbar.html");});
+        $(function () {$("#errorwrap").load("elements/errorwrap.html");});
+        $(function () {$("#submitwrap").load("elements/submitwrap.html");});
     </script>
 </head>
 
 <body>
 <div id="navbar"></div>
 <div id="errorwrap"></div>
+<div id="submitwrap"></div>
 <div id="Main" class="main" style="width:100%">
     <div class="firstColoumn" style="width:100%">
         <div style="display: flex; flex-direction: column;">

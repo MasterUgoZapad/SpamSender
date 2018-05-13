@@ -9,22 +9,16 @@
 		<script src="scripts/see_groups.js"></script>
 		<script src="scripts/common.js"></script>
 		<script>
-			//include navbar
-			$(function(){
-				$("#navbar").load("elements/navbar.html");
-			});
-		</script>
-		<script>
-			//include error wrap
-			$(function(){
-				$("#errorwrap").load("elements/errorwrap.html");
-			});
+			$(function () {$("#navbar").load("elements/navbar.html");});
+			$(function () {$("#errorwrap").load("elements/errorwrap.html");});
+			$(function () {$("#submitwrap").load("elements/submitwrap.html");});
 		</script>
 	</head>
 
 	<body>
 	<div id="navbar"></div>
 	<div id="errorwrap"></div>
+	<div id="submitwrap"></div>
 		<div id="Main" class="main">
 			<div class="firstColoumn">
 				<h2 align="center">Group list</h2>

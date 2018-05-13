@@ -9,23 +9,18 @@
     <script src="scripts/add_people.js"></script>
     <script src="scripts/validation/add_people.js"></script>
     <script src="scripts/common.js"></script>
+    <script src="elements/EN-strings.js"></script>
     <script>
-        //include navbar
-        $(function () {
-            $("#navbar").load("elements/navbar.html");
-        });
-    </script>
-    <script>
-        //include error wrap
-        $(function () {
-            $("#errorwrap").load("elements/errorwrap.html");
-        });
+        $(function () {$("#navbar").load("elements/navbar.html");});
+        $(function () {$("#errorwrap").load("elements/errorwrap.html");});
+        $(function () {$("#submitwrap").load("elements/submitwrap.html");});
     </script>
 </head>
 
 <body>
 <div id="navbar"></div>
 <div id="errorwrap"></div>
+<div id="submitwrap"></div>
 <div id="Main" class="main">
     <div class="firstColoumn" style="width: inherit">
         <h2 align="center">Edit user information</h2>

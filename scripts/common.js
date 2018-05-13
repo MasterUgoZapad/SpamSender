@@ -30,6 +30,22 @@ function HideFalue() {
     error.style.display = "none";
 }
 
+function Submit(message, on_sunbmit_function, parameters) {
+    var message_label = document.getElementById("labelSubmit");
+    message_label.textContent = message;
+    document.getElementById("submit_button_ok").onclick = function() {
+        HideSubmit();
+        on_sunbmit_function(parameters);
+    };
+    var error = document.getElementById("wrapSubmit");
+    error.style.display = "flex";
+}
+
+function HideSubmit() {
+    var error = document.getElementById("wrapSubmit");
+    error.style.display = "none";
+}
+
 function RemoveOptions(select_id) {
     var select = document.getElementById(select_id);
     while (select.options.length) {

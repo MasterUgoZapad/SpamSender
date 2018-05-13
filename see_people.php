@@ -8,25 +8,20 @@
     <script src="scripts/validation/jquery.validate.js"></script>
     <script src="scripts/see_people.js"></script>
     <script src="scripts/common.js"></script>
+    <script src="elements/EN-errorstrings.js"></script>
+    <script src="elements/EN-strings.js"></script>
     <script>
-        //include navbar
-        $(function () {
-            $("#navbar").load("elements/navbar.html");
-        });
-    </script>
-    <script>
-        //include error wrap
-        $(function () {
-            $("#errorwrap").load("elements/errorwrap.html");
-        });
+        $(function () {$("#navbar").load("elements/navbar.html");});
+        $(function () {$("#errorwrap").load("elements/errorwrap.html");});
+        $(function () {$("#submitwrap").load("elements/submitwrap.html");});
     </script>
 </head>
 
 <body>
 <div id="errorwrap"></div>
 <div id="navbar"></div>
+<div id="submitwrap"></div>
 <div id="Main" class="main">
-
     <div class="firstColoumn">
         <h2 align="center">People list</h2>
         <form align="left" style="width:auto">
