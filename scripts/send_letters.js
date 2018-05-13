@@ -6,8 +6,6 @@ var current_man_index = undefined;
 window.onload = function () {
     RefreshGroups();
     RefreshTemplates();
-    GetTemplateFromRequest();
-    GetGroupFromRequest();
     GetHumanFromRequest();
 };
 
@@ -96,6 +94,7 @@ function RefreshGroups() {
         success: function (data) {
             UpdateSelectContent(data, "groupSelect", StringifyGroup);
             AddSelectNullOption("groupSelect", "None group select");
+            GetGroupFromRequest();
         }
     });
 }
@@ -107,6 +106,7 @@ function RefreshTemplates() {
         success: function (data) {
             UpdateSelectContent(data, "templateSelect", StringifyTemplate);
             AddSelectNullOption("templateSelect", "None template select");
+            GetTemplateFromRequest();
         }
     });
 }
