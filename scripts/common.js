@@ -37,13 +37,16 @@ function Submit(message, on_sunbmit_function, parameters) {
         HideSubmit();
         on_sunbmit_function(parameters);
     };
-    var error = document.getElementById("wrapSubmit");
-    error.style.display = "flex";
+    var wrap = document.getElementById("wrapSubmit");
+    wrap.style.display = "flex";
 }
 
 function HideSubmit() {
-    var error = document.getElementById("wrapSubmit");
-    error.style.display = "none";
+    document.getElementById("submit_button_ok").onclick = function() {
+        HideSubmit();
+    };
+    var wrap = document.getElementById("wrapSubmit");
+    wrap.style.display = "none";
 }
 
 function RemoveOptions(select_id) {
