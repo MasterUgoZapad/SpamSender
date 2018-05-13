@@ -38,7 +38,7 @@ function GetGroupFromRequest() {
         if (CheckIfValid(index)) {
             $.get({
                 dataType: "json",
-                url: "request_handler.php?action=get_group_data",
+                url: "rest/request_handler.php?action=get_group_name",
                 data: {'index': index},
                 success: function (data) {
                     ApplyGroupNameData(data);
