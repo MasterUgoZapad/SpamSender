@@ -96,3 +96,11 @@
             border-color: #ebccd1;
             padding:1px 20px 1px 20px;
         }
+
+        select.select_widelist{
+            width:98%;
+            margin:1% 1% 1% 1%;
+            padding:1% 1% 1% 1%;
+            overflow:hidden;
+            font: 12pt consolas;
+        }

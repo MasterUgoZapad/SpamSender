@@ -32,8 +32,7 @@
             <button align="right" type="button" onclick="ManageEmails()">Manage Emails</button>
             <button align="right" type="button" onclick="SendToPeople()">Send letter to</button>
         </form>
-        <select onchange="OnManSelect()" id="PeopleListSelect" size="50"
-                style="width:98%; margin:1% 1% 1% 1%; padding:1% 1% 1% 1%; overflow:hidden; font: 12pt consolas;">
+        <select onchange="OnManSelect()" id="PeopleListSelect" size="50" class="select_widelist" onFocus="window.scrollTo(0, 0);">
         </select>
     </div>
     <div class="secondColoumn">

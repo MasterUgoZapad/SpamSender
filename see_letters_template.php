@@ -32,8 +32,7 @@
         </form>
         <form align="left" style="width:auto">
         </form>
-        <select onchange="OnTemplateSelect()" id="TemplateListSelect" size="50"
-                style="width:98%; margin:1% 1% 1% 1%; padding:1% 1% 1% 1%; overflow:hidden; font: 12pt consolas;">
+        <select onchange="OnTemplateSelect()" id="TemplateListSelect" size="50" class="select_widelist" onFocus="window.scrollTo(0, 0);">
         </select>
 
     </div>

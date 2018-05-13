@@ -38,8 +38,7 @@
             <button type="button" onclick="DeleteEmail()">Delete</button>
             <button type="button" onclick="location.href = 'see_people.php'">Back</button>
         </form>
-        <select id="EmailListSelect" size="10"
-                style="width:95%; margin:5px 5px 5px 5px; padding:4px 4px 4px 4px; overflow:hidden; font: 12pt consolas;">
+        <select id="EmailListSelect" size="10" class="select_widelist" onFocus="window.scrollTo(0, 0);">
         </select>
     </div>
 </div>

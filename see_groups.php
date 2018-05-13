@@ -30,7 +30,7 @@
 					<button type="button" onclick="DeleteGroup()">Delete</button>
 					<button type="button" onclick="SendToGroup()">Send letter to group</button>
 				</form>
-				<select onchange="OnGroupSelect()" id="GroupListSelect" size="50" style="width:98%; margin:1% 1% 1% 1%; padding:1% 1% 1% 1%; overflow:hidden; font: 12pt consolas;">
+				<select onchange="OnGroupSelect()" id="GroupListSelect" size="50" class="select_widelist" onFocus="window.scrollTo(0, 0);">
 				</select>
 			</div>
 			<div class="secondColoumn">
