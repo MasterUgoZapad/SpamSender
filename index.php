@@ -8,22 +8,36 @@ session_start();
 <head>
     <title>Spam sender</title>
     <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <script src="scripts/index.js"></script>
     <script src="scripts/validation/jquery.js"></script>
+    <script src="scripts/validation/index.js"></script>
     <script src="elements/EN-errorstrings.js"></script>
     <script src="elements/EN-strings.js"></script>
     <script>
-        $(function () {$("#navbar").load("elements/navbar.html");});
-        $(function () {$("#errorwrap").load("elements/errorwrap.html");});
-        $(function () {$("#submitwrap").load("elements/submitwrap.html");});
+        $(function () {
+            $("#errorwrap").load("elements/errorwrap.html");
+        });
+        $(function () {
+            $("#submitwrap").load("elements/submitwrap.html");
+        });
     </script>
 </head>
 
 <body>
-<div id="navbar"></div>
 <div id="errorwrap"></div>
 <div id="submitwrap"></div>
-<div class="main">
-    <h2>Welcome to Spam Sender</h2>
+<div id="Main" class="main" style="width:100%">
+    <div class="firstColoumn" style="width:100%">
+        <form id="formLogin" name="formLogin">
+            <div style="display: flex; flex-direction: column;">
+                <label style="display: inline-block;">Login :</label>
+                <input style="width: 95%" type="text" id="login" name="login"/>
+                <label style="display: inline-block;">Password :</label>
+                <input style="width: 95%" type="password" id="pass" name="pass"/>
+            </div>
+            <button align="right" type="button" onclick="location.href = 'main.php';">Submit</button>
+        </form>
+    </div>
 </div>
 
 </body>
