@@ -11,7 +11,10 @@ function GetTemplateFromRequest(){
     if (CheckIfValid(params)){
         var template_string = params['template'];
         var template_index = decodeURI(template_string);
-        GetTemplateData(template_index, ApplyTemplateData);
+        if (CheckIfValid(template_index))
+            GetTemplateData(template_index, ApplyTemplateData);
+        else
+            Falue(error_url_invalid_parameters);
     }
 }
 
@@ -31,7 +34,12 @@ function RefreshAliases(){
         url: "rest/request_handler.php?action=get_aliases",
         //data: data,
         success: function(data) {
-            ApplyGroupData(data, data['size'], "aliasesText", StringifyAlias);
+            if (CheckResponce(data)) {
+                ApplyGroupData(data, data['size'], "aliasesText", StringifyAlias);
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -56,15 +64,17 @@ function SubmitData(){
 
 function EditTemplate(template){
     $.post({
-        url: 'end_templates.php?action=edit_template',
+        url: 'rest/request_handler.php?action=edit_template',
         dataType: "json",
         data: template,
-        success: function(responce) {
-            ApplyTemplateData({});
-            location.href = "see_letters_template.php"
+        success: function(data) {
+            if (CheckResponce(data)) {
+                ApplyTemplateData({});
+                location.href = "see_letters_template.php";
+            }
         },
-        error: function(responce) {
-            Falue(responce);
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -74,12 +84,14 @@ function AddTemplate(template){
         url: 'rest/request_handler.php?action=add_template',
         dataType: "json",
         data: template,
-        success: function(template) {
-            ApplyTemplateData({});
-            location.href = "add_letters_template.php"
+        success: function(data) {
+            if (CheckResponce(data)) {
+                ApplyTemplateData({});
+                location.href = "add_letters_template.php";
+            }
         },
-        error: function(responce) {
-            Falue(responce);
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }

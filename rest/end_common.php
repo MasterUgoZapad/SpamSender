@@ -7,12 +7,6 @@ define('std_user', "root");
 define('std_password', "911dickhorse");
 define('database', "database");
 
-function connect_db(){
-    $connection =  mysqli_connect("polkilok.ddns.net", "test", "911dickhorse", "MPW", "50581");
-    mysqli_query($connection,"SET NAMES utf8 COLLATE utf8_unicode_ci");
-    return $connection;
-}
-
 function get_human_from_request(){
     $human = new Human();
     $human->m_index=$_POST['index'];
@@ -29,12 +23,15 @@ function get_human_from_request(){
     return $human;
 }
 
-function get_group_data($index){
+function get_group_data(&$response, $index){
     $people_list = Array();
-    $connection = connect_db();
+    if (!$connection = connect_db_or_error($response))
+        return false;
     $proc = $connection->prepare("call SelectGroup(?)");
     $proc->bind_param('i',$index);
     $proc->execute();
+    if (!check_if_execution_error($response, $proc))
+        return false;
     $result = $proc->get_result();
     $index = 0;
     while ($row = $result->fetch_object()) {
@@ -47,15 +44,21 @@ function get_group_data($index){
         $people_list[$index] = $human;
     }
     $proc->close();
+    success($response);
     return $people_list;
 }
 
-function get_people(){
+function get_people(&$response){
     $people_list = Array();
-    $connection = connect_db();
-    $proc = $connection->query("call SelectHumansShort()");
+    if (!$connection = connect_db_or_error($response))
+        return false;
+    $proc = $connection->prepare("call SelectHumansShort()");
+    $proc->execute();
+    if (!check_if_execution_error($response, $proc))
+        return false;
+    $result = $proc->get_result();
     $index = 0;
-    while ($row = $proc->fetch_object()) {
+    while ($row = $result->fetch_object()) {
         ++$index;
         $human = new Human();
         $human->m_index=$row->Id;
@@ -65,16 +68,22 @@ function get_people(){
         $people_list[$human->m_index] = $human;
     }
     $proc->close();
+    success($response);
     return $people_list;
 }
 
-function get_aliases()
+function get_aliases(&$response)
 {
     $aliases_list = Array();
-    $connection = connect_db();
-    $proc = $connection->query("call SelectAliases()");
+    if (!$connection = connect_db_or_error($response))
+        return false;
+    $proc = $connection->prepare("call SelectAliases()");
+    $proc->execute();
+    if (!check_if_execution_error($response, $proc))
+        return false;
+    $result = $proc->get_result();
     $index = 0;
-    while ($row = $proc->fetch_object()) {
+    while ($row = $result->fetch_object()) {
         ++$index;
         $aliase = new Aliase();
         $aliase->m_index=$row->Id;
@@ -83,17 +92,20 @@ function get_aliases()
         $aliases_list[$index] = $aliase;
     }
     $proc->close();
+    success($response);
     return $aliases_list;
 }
 
-function get_emails($index)
+function get_emails(&$response, $index)
 {
     $mail_list = Array();
-    $connection = connect_db();
+    if (!$connection = connect_db_or_error($response))
+        return false;
     $proc = $connection->prepare("call SelectEmails(?)");
     $proc->bind_param('i', $index);
     $proc->execute();
-    $err = $proc->error;
+    if (!check_if_execution_error($response, $proc))
+        return false;
     $result = $proc->get_result();
     while($row = $result->fetch_object()) {
         $email = new Email();
@@ -102,15 +114,24 @@ function get_emails($index)
         $mail_list[] = $email;
     }
     $proc->close();
+    success($response);
     return $mail_list;
 }
 
-function get_human_data($index){
-    $connection = connect_db();
+function get_human_data(&$response, $index){
+    if (!$connection = connect_db_or_error($response))
+        return false;
     $proc = $connection->prepare("call SelectHumanById(?)");
     $proc->bind_param('i',$index);
     $proc->execute();
+    if (!check_if_execution_error($response, $proc))
+        return false;
     $result = $proc->get_result();
+    if (!$result){
+        global $Error_codes;
+        fail_and_message($response, $Error_codes["Zero results"], '');
+        return false;
+    }
     $row = $result->fetch_object();
     $human = new Human();
     $human->m_index=$row->Id;
@@ -124,27 +145,42 @@ function get_human_data($index){
     $human->m_town=$row->Town;
     $human->m_origin=$row->Origin;
     $proc->close();
+
+    $response['human'] = $human;
+    success($response);
     return $human;
 }
 
-function execute_or_error($mysql_procedure){
-    $mysql_procedure->execute();
-    $error_message = $mysql_procedure->error;
-    if ($error_message != "")
-        fail_and_message($Error_codes["Failed to execute procedure"],$error_message);
+function check_if_execution_error(&$response, $proc)
+{
+    global $Error_codes;
+    $error = $proc->error;
+    if ($error != "") {
+        fail_and_message($response, $Error_codes["Failed to execute procedure"], $error);
+        return false;
+    }
+    return true;
 }
 
-function connect_db_or_error($mysql_procedure){
-    $connecton = connect_db();
-    if (!$connecton)
-        fail_and_message($Error_codes["Failed to connect db"],'');
+function connect_db_or_error(&$response)
+{
+    global $Error_codes;
+    $connection = mysqli_connect("polkilok.ddns.net", "test", "911dickhorse", "MPW", "50581");
+    if ($connection) {
+        mysqli_query($connection, "SET NAMES utf8 COLLATE utf8_unicode_ci");
+        return $connection;
+    }
+    fail_and_message($response, $Error_codes["Failed to connect db"], mysqli_connect_error());
 }
 
-function fail_and_message($error_code, $error_message){
-    $response['status'] = true;
+function fail_and_message(&$response, $error_code, $error_message){
+    $response['status'] = false;
     $response['error_code'] = $error_code;
-    echo json_encode($response);
-    exit;
+    $response['error_message'] = $error_message;
+}
+
+function success(&$response){
+    $response['status'] = true;
 }
 
 ?>

@@ -18,9 +18,14 @@ function StringifyEmail(email) {
     return email["m_value"];
 }
 
-function Falue(message) {
+function Falue(message, server_message) {
     var error_message = document.getElementById("labelError");
     error_message.textContent = message;
+    var info_message = document.getElementById("labelAdditionalInfo");
+    if (CheckIfValidOrEmpty(server_message))
+        info_message.textContent = "With message : " + server_message;
+    else
+        info_message.textContent = "";
     var error = document.getElementById("wrapError");
     error.style.display = "flex";
 }
@@ -74,17 +79,23 @@ function UpdateSelectContent(responce, select_id, stringify_func) {
             select.appendChild(new_option);
         }
     }
+    else
+        Falue(error_server_invalid_responce);
 }
 
 function PopulateDatalist(values, datalistid) {
     RemoveOptions(datalistid);
     var list = document.getElementById(datalistid);
     var list_size = values["size"];
-    for (var i = 0; i < list_size; ++i) {
-        var option = document.createElement('option');
-        option.value = values[i];
-        list.appendChild(option);
+    if (CheckIfValid(list_size)) {
+        for (var i = 0; i < list_size; ++i) {
+            var option = document.createElement('option');
+            option.value = values[i];
+            list.appendChild(option);
+        }
     }
+    else
+        Falue(error_server_invalid_responce);
 }
 
 function AddSelectNullOption(select_id, option_name) {
@@ -176,7 +187,12 @@ function RefreshRoles() {
         url: "rest/request_handler.php?action=get_roles",
         //data: data,
         success: function (data) {
-            PopulateDatalist(data, "defined_roles");
+            if (CheckResponce(data)) {
+                PopulateDatalist(data, "defined_roles");
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -186,7 +202,12 @@ function RefreshTowns() {
         dataType: "json",
         url: "rest/request_handler.php?action=get_towns",
         success: function (data) {
-            PopulateDatalist(data, "defined_town");
+            if (CheckResponce(data)) {
+                PopulateDatalist(data, "defined_town");
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -196,7 +217,12 @@ function RefreshAreas() {
         dataType: "json",
         url: "rest/request_handler.php?action=get_areas",
         success: function (data) {
-            PopulateDatalist(data, "defined_area");
+            if (CheckResponce(data)) {
+                PopulateDatalist(data, "defined_area");
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -206,7 +232,12 @@ function RefreshOrigins() {
         dataType: "json",
         url: "rest/request_handler.php?action=get_origins",
         success: function (data) {
-            PopulateDatalist(data, "defined_origin");
+            if (CheckResponce(data)) {
+                PopulateDatalist(data, "defined_origin");
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -217,7 +248,12 @@ function GetHumanData(index, data_handler) {
         url: "rest/request_handler.php?action=get_human_data",
         data: {"index": index},
         success: function (data) {
-            data_handler(data);
+            if (CheckResponce(data)) {
+                data_handler(data['human']);
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -228,7 +264,12 @@ function GetTemplateData(index, data_handler) {
         url: "rest/request_handler.php?action=get_template_data",
         data: {'index': index},
         success: function (data) {
-            data_handler(data);
+            if (CheckResponce(data)) {
+                data_handler(data['template']);
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -251,4 +292,24 @@ function MailToString(responce, maxlen){
         }
     }
     return email_string;
+}
+
+function CheckResponce(response){
+    var status = response['status'];
+    var error_code = response['error_code'];
+    var error_message = response['error_message'];
+    if (!CheckIfValid(status) || status == false){
+        if (CheckIfValid(error_code))
+            var message = GetErrorMessageByServerErrorSode(error_code);
+        else
+            message = error_server_default;
+        Falue(message, error_message);
+        return false;
+    }
+    else
+        return true;
+}
+
+function ResponceFailed(response){
+    Falue(error_rest_failed);
 }

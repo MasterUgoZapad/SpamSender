@@ -7,84 +7,88 @@ include_once "end_people.php";
 include_once "end_templates.php";
 
 $action = $_REQUEST["action"];
-$response_string = "";
+$response = array();
 switch ($action) {
     case 'get_emails':
-        $response_string = get_emails_encoded_string();
+        get_emails_encoded_string($response);
         break;
     case 'add_email':
-        $response_string = add_email();
+        add_email($response);
         break;
     case 'delete_email':
-        $response_string = delete_email();
+        delete_email($response);
         break;
     case 'get_groups':
-        $response_string = get_groups();
+        get_groups($response);
         break;
     case 'get_group_data':
-        $response_string = get_group_data_and_encode();
+        get_group_data_and_encode($response);
         break;
     case 'get_group_by_selection':
-        $response_string = get_group_by_selection();
+        get_group_by_selection($response);
         break;
     case 'add_group':
-        $response_string = add_group();
+        add_group($response);
         break;
     case 'get_group_name':
-        $response_string = get_group_name();
+        get_group_name($response);
         break;
     case 'delete_group':
-        $response_string = delete_group();
+        delete_group($response);
         break;
     case "get_aliases":
-        $response_string = get_aliases_encoded_string();
+        get_aliases_encoded_string($response);
         break;
     case "get_roles":
-        $response_string = get_roles();
+        get_roles($response);
         break;
     case "get_areas":
-        $response_string = get_areas();
+        get_areas($response);
         break;
     case "get_towns":
-        $response_string = get_towns();
+        get_towns($response);
         break;
     case "get_origins":
-        $response_string = get_origins();
+        get_origins($response);
         break;
     case "send_letters":
-        $response_string = send_letters();
+        send_letters($response);
         break;
     case 'get_people':
-        $response_string = get_people_encoded_string();
+        get_people_encoded_string($response);
         break;
     case 'add_human':
-        $response_string = add_human();
+        add_human($response);
         break;
     case 'delete_people':
-        $response_string = delete_people();
+        delete_people($response);
         break;
     case 'edit_human':
-        $response_string = edit_human();
+        edit_human($response);
         break;
     case 'get_human_data':
-        $response_string = get_human_data_encoded_string();
+        get_human_data_encoded_string($response);
         break;
     case 'get_templates':
-        $response_string = get_templates();
+        get_templates($response);
         break;
     case 'get_template_data':
-        $response_string = get_template();
+        get_template($response);
         break;
     case 'add_template':
-        $response_string = add_template();
+        add_template($response);
         break;
     case 'delete_templates':
-        $response_string = delete_template();
+        delete_template($response);
         break;
     case 'edit_template':
-        $response_string = edit_template();
+        edit_template($response);
+        break;
+    default:
+        global $Error_codes;
+        fail_and_message($response, $Error_codes["Wrong request"],'');
         break;
 }
 
-echo $response_string;
+echo json_encode($response);;
 ?>

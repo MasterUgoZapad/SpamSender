@@ -39,7 +39,12 @@ function GetGroupFromRequest() {
                 url: "rest/request_handler.php?action=get_group_name",
                 data: {'index': index},
                 success: function (data) {
-                    ApplyGroupNameData(data);
+                    if (CheckResponce(data)) {
+                        ApplyGroupNameData(data);
+                    }
+                },
+                error: function(data){
+                    ResponceFailed(data);
                 }
             });
         }
@@ -54,7 +59,12 @@ function ApplyHumanData(human) {
         url: "rest/request_handler.php?action=get_emails",
         data: {"index": human['m_index']},
         success: function (data) {
-            document.getElementById('to').value = MailToString(data, 30);
+            if (CheckResponce(data)) {
+                document.getElementById('to').value = MailToString(data, 30);
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -92,9 +102,14 @@ function RefreshGroups() {
         dataType: "json",
         url: "rest/request_handler.php?action=get_groups",
         success: function (data) {
-            UpdateSelectContent(data, "groupSelect", StringifyGroup);
-            AddSelectNullOption("groupSelect", "None group select");
-            GetGroupFromRequest();
+            if (CheckResponce(data)) {
+                UpdateSelectContent(data, "groupSelect", StringifyGroup);
+                AddSelectNullOption("groupSelect", "None group select");
+                GetGroupFromRequest();
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -104,9 +119,14 @@ function RefreshTemplates() {
         dataType: "json",
         url: "rest/request_handler.php?action=get_templates",
         success: function (data) {
-            UpdateSelectContent(data, "templateSelect", StringifyTemplate);
-            AddSelectNullOption("templateSelect", "None template select");
-            GetTemplateFromRequest();
+            if (CheckResponce(data)) {
+                UpdateSelectContent(data, "templateSelect", StringifyTemplate);
+                AddSelectNullOption("templateSelect", "None template select");
+                GetTemplateFromRequest();
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -119,7 +139,12 @@ function OnTemplateSelect() {
             url: "rest/request_handler.php?action=get_template_data",
             data: {'index': template['m_index']},
             success: function (data) {
-                ApplyTemplateData(data);
+                if (CheckResponce(data)) {
+                    ApplyTemplateData(data['template']);
+                }
+            },
+            error: function(data){
+                ResponceFailed(data);
             }
         });
     else
@@ -156,7 +181,10 @@ function SendLetters() {
         url: "rest/request_handler.php?action=send_letters",
         data: data,
         success: function (data) {
-            Falue("Sended");
+            CheckResponce(data);
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }

@@ -1,5 +1,5 @@
 window.onload = function() {
-    ApplyManData({});
+    ApplyDefaultManData();
     RefreshPeople();
 };
 
@@ -10,8 +10,13 @@ function RefreshPeople(){
         url: "rest/request_handler.php?action=get_people",
         //data: data,
         success: function(data) {
-            UpdateSelectContent(data, "PeopleListSelect", StringifyPeople);
-            ApplyManData({});
+            if (CheckResponce(data)) {
+                UpdateSelectContent(data, "PeopleListSelect", StringifyPeople);
+                ApplyDefaultManData();
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -32,11 +37,14 @@ function DeletePeopleByIndex(index){
             url: 'rest/request_handler.php?action=delete_people',
             dataType: "json",
             data: {'index': index},
-            success: function (responce) {
-                RefreshPeople(responce);
+            success: function (data) {
+                if (CheckResponce(data)) {
+                    RefreshPeople(data);
+                    ApplyDefaultManData();
+                }
             },
-            error: function (responce) {
-                Falue(responce);
+            error: function(data){
+                ResponceFailed(data);
             }
         });
     }
@@ -50,6 +58,8 @@ function EditPeople(){
         link = link+index;
         location.href = link;
     }
+    else
+        Falue(error_element_not_selected);
 }
 
 function ManageEmails(){
@@ -60,6 +70,8 @@ function ManageEmails(){
         link = link+index;
         location.href = link;
     }
+    else
+        Falue(error_element_not_selected);
 }
 
 function SendToPeople(){
@@ -70,6 +82,8 @@ function SendToPeople(){
         link = link+index;
         location.href = link;
     }
+    else
+        Falue(error_element_not_selected);
 }
 
 function OnManSelect(){
@@ -101,6 +115,19 @@ function ApplyManData(man) {
     RefreshHumanEmails(man['m_index']);
 }
 
+function ApplyDefaultManData() {
+    document.getElementById('name').textContent = '';
+    document.getElementById('sname').textContent = '';
+    document.getElementById('fname').textContent = '';
+    document.getElementById('age').textContent = '';
+    document.getElementById('regYear').textContent = '';
+    document.getElementById('area').textContent = '';
+    document.getElementById('town').textContent = '';
+    document.getElementById('role').textContent = '';
+    document.getElementById('origin').textContent = '';
+    document.getElementById('mail').textContent = '';
+}
+
 function RefreshHumanEmails(index) {
     var email_label = document.getElementById('mail');
     if (CheckIfValid(index)) {
@@ -109,7 +136,12 @@ function RefreshHumanEmails(index) {
             url: "rest/request_handler.php?action=get_emails",
             data: {"index": index},
             success: function (data) {
-                email_label.textContent = MailToString(data, 30);
+                if (CheckResponce(data)) {
+                    email_label.textContent = MailToString(data, 30);
+                }
+            },
+            error: function(data){
+                ResponceFailed(data);
             }
         });
     }

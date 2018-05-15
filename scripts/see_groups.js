@@ -7,7 +7,12 @@ function RefreshGroups(){
         dataType: "json",
         url: "rest/request_handler.php?action=get_groups",
         success: function(data) {
-            UpdateSelectContent(data, "GroupListSelect", StringifyGroup);
+            if (CheckResponce(data)) {
+                UpdateSelectContent(data, "GroupListSelect", StringifyGroup);
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -20,7 +25,12 @@ function OnGroupSelect(){
             url: "rest/request_handler.php?action=get_group_data",
             data: {'index': group['m_index']},
             success: function(data) {
-                ApplyGroupData(data, data['size'], "groupExplanationText", StringifyPeople);
+                if (CheckResponce(data)) {
+                    ApplyGroupData(data, data['size'], "groupExplanationText", StringifyPeople);
+                }
+            },
+            error: function(data){
+                ResponceFailed(data);
             }
         });
     }
@@ -34,15 +44,8 @@ function SendToGroup(){
         link = link+group['m_index'];
         location.href = link;
     }
-}
-
-function EditGroup(){
-    var group = GetSelectedValue("GroupListSelect");
-    if (CheckIfValid(group)) {
-        var link = 'add_groups.php?group=';
-        link = link+JSON.stringify(group);
-        location.href = link;
-    }
+    else
+        Falue(error_element_not_selected);
 }
 
 function DeleteGroup(){
@@ -50,6 +53,8 @@ function DeleteGroup(){
     if (CheckIfValid(group)) {
         Submit(submit_delete_element, DeleteGroupByIndex, group);
     }
+    else
+        Falue(error_element_not_selected);
 }
 
 function DeleteGroupByIndex(group){
@@ -58,8 +63,13 @@ function DeleteGroupByIndex(group){
         data: group,
         url: "rest/request_handler.php?action=delete_group",
         success: function(data) {
-            RefreshGroups();
-            ApplyGroupData({}, 0, "groupExplanationText", StringifyPeople);
+            if (CheckResponce(data)) {
+                RefreshGroups();
+                ApplyGroupData({}, 0, "groupExplanationText", StringifyPeople);
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }

@@ -8,7 +8,12 @@ function RefreshTemplates(){
         dataType: "json",
         url: "rest/request_handler.php?action=get_templates",
         success: function(data) {
-            UpdateSelectContent(data, "TemplateListSelect", StringifyTemplate);
+            if (CheckResponce(data)) {
+                UpdateSelectContent(data, "TemplateListSelect", StringifyTemplate);
+            }
+        },
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
@@ -36,6 +41,8 @@ function EditTemplate(){
         link = link+template['m_index'];
         location.href = link;
     }
+    else
+        Falue(error_element_not_selected);
 }
 
 function ApplyTemplate(){
@@ -45,6 +52,8 @@ function ApplyTemplate(){
         link = link+template['m_index'];
         location.href = link;
     }
+    else
+        Falue(error_element_not_selected);
 }
 
 function DeleteTemplate(){
@@ -53,6 +62,8 @@ function DeleteTemplate(){
         var index = template['m_index'];
         Submit(submit_delete_element, DeleteTemplateByIndex, index);
     }
+    else
+        Falue(error_element_not_selected);
 }
 
 function DeleteTemplateByIndex(index){
@@ -62,8 +73,13 @@ function DeleteTemplateByIndex(index){
             data: {'index': index},
             url: "rest/request_handler.php?action=delete_templates",
             success: function(data) {
-                RefreshTemplates();
-                ApplyTemplateData({});
+                if (CheckResponce(data)) {
+                    RefreshTemplates();
+                    ApplyTemplateData({});
+                }
+            },
+            error: function(data){
+                ResponceFailed(data);
             }
         });
     }

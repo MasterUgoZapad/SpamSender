@@ -13,14 +13,17 @@ function GetManFromRequest() {
     var params = GetURLParamsArray();
     if (CheckIfValid(params)) {
         var man_string = params['man'];
-        var man = decodeURI(man_string);
-        GetHumanData(man, ApplyManData);
+        var index = decodeURI(man_string);
+        if (CheckIfValid(index))
+            GetHumanData(index, ApplyManData);
+        else
+            Falue(error_url_invalid_parameters);
     }
 }
 
 function ClearForms() {
-    man = {};
-    ApplyManData(man);
+    current_man_index = undefined;
+    ApplyManData({});
 }
 
 function ApplyManData(man) {
@@ -71,26 +74,31 @@ function EditHuman(man) {
         url: 'rest/request_handler.php?action=edit_human',
         dataType: "json",
         data: man,
-        success: function (responce) {
-            ClearForms();
-            location.href = "see_people.php"
+        success: function (data) {
+            if (CheckResponce(data)) {
+                ClearForms();
+                location.href = "see_people.php";
+            }
         },
-        error: function (responce) {
-            Falue(responce);
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }
 
 function AddHuman(man) {
     $.post({
+        dataType: "json",
         url: 'rest/request_handler.php?action=add_human',
         data: man,
-        success: function (responce) {
-            ClearForms();
-            location.href = "add_people.php"
+        success: function (data) {
+            if (CheckResponce(data)) {
+                ClearForms();
+                location.href = "add_people.php";
+            }
         },
-        error: function (responce) {
-            Falue(responce);
+        error: function(data){
+            ResponceFailed(data);
         }
     });
 }

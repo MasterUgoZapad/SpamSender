@@ -45,7 +45,9 @@ class Email{
 }
 
 $Error_codes = array(
-    "Failed to execute procedure" => 1,
-    "Failed to connect db" => 2,
+    "Failed to connect db" => 1,
+    "Failed to execute procedure" => 2,
+    "Zero results" => 3,
+    "Wrong request" => 3,
 );
 ?>
