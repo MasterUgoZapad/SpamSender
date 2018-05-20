@@ -31,26 +31,28 @@
 <div id="Main" class="main">
     <div class="firstColoumn" style="width: inherit">
         <h2 align="center">Users list</h2>
-        <label id="ManDecription"></label>
-        <form style="width:auto" name="userForm">
-            <div style="display: flex; flex-direction: column;">
-                <div>
-                    <label for="login">Login :</label>
-                    <input type="text" id="login" name="login"/>
-                    <label for="pass">Password :</label>
-                    <input type="text" id="pass" name="pass"/>
-                    <label for="login">Previliges level :</label>
-                    <select type="text" id="level" name="level">
-                        <option value="1">User</option>
-                        <option value="2">Admin</option>
-                    </select>
-                    <button style="width: max-content;" type="submit">Add new</button>
-                </div>
+        <fieldset>
+            <legend>New user</legend>
+            <form style="width:auto" name="userForm">
+                <div style="display: flex; flex-direction: column;">
+                    <div style="display: flex; flex-direction: column;">
+                        <label for="login">Login :</label>
+                        <input type="text" id="login" name="login"/>
+                        <label for="pass">Password :</label>
+                        <input type="password" id="pass" name="pass"/>
+                        <label for="login">Previliges level :</label>
+                        <select id="level" name="level">
+                            <option value="1">User</option>
+                            <option value="2">Admin</option>
+                        </select>
+                        <button style="width: max-content;" type="submit">Add new</button>
+                    </div>
 
-            </div>
-        </form>
+                </div>
+            </form>
+        </fieldset>
         <form style="width:auto">
-            <button type="button" onclick="">Delete</button>
+            <button type="button" onclick="DeleteUsers()">Delete</button>
         </form>
         <select id="UsersListSelect" size="10" class="select_widelist" onFocus="window.scrollTo(0, 0);">
         </select>
