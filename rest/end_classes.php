@@ -44,10 +44,21 @@ class Email{
     public $m_value;
 }
 
+class User{
+    public $m_index;
+
+    public $m_login;
+    public $m_pass;
+    public $m_level;
+}
+
 $Error_codes = array(
     "Failed to connect db" => 1,
     "Failed to execute procedure" => 2,
     "Zero results" => 3,
-    "Wrong request" => 3,
+    "Wrong request" => 4,
+    "Unautorized request" => 5,
+    "Login failed" => 6,
+    "Wrong data" => 7,
 );
 ?>
