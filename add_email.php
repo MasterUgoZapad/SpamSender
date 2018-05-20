@@ -26,13 +26,16 @@
     <div class="firstColoumn" style="width: inherit">
         <h2 align="center">Email list</h2>
         <label id="ManDecription"></label>
-        <form style="width:auto" name="mailForm">
-            <div style="display: flex; flex-direction: column;">
-                <label for="mail">New e-mail:</label>
-                <input style="width:95%;"type="text" id="mail" name="mail"/>
-                <button style="width: max-content;" type="submit">Add new</button>
-            </div>
-        </form>
+        <fieldset>
+            <legend>New E-mail</legend>
+            <form style="width:auto" name="mailForm">
+                <div style="display: flex; flex-direction: column;">
+                    <label for="mail">E-mail address:</label>
+                    <input style="width:95%;" type="text" id="mail" name="mail"/>
+                    <button style="width: max-content;" type="submit">Add</button>
+                </div>
+            </form>
+        </fieldset>
         <form style="width:auto">
             <button type="button" onclick="RefreshHumanEmails(current_man_index)">Refresh</button>
             <button type="button" onclick="DeleteEmail()">Delete</button>
