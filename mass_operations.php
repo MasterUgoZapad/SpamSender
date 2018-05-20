@@ -57,7 +57,7 @@ if (!isset($_SESSION['login']) || empty($_SESSION['login']) || !isset($_SESSION[
                 <input style="width: 98%" type="text" id="area" name="area" list="defined_area"/>
                 <label>Default town :</label>
                 <input style="width: 98%" type="text" id="town" name="town" list="defined_town"/>
-                <label>Default oole :</label>
+                <label>Default role :</label>
                 <input style="width: 98%" type="text" id="role" name="role" list="defined_roles"/>
                 <label>Default origin :</label>
                 <input style="width: 98%" type="text" id="origin" name="origin" list="defined_origin"/>
