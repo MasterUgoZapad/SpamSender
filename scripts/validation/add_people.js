@@ -3,8 +3,8 @@ $(function () {
         rules: {
             name: "required",
             sname: "required",
-            fname: "required",
-            age: "required",
+            //fname: "required",
+            //age: "required",
             role: "required",
             area: "required",
             town: "required",
@@ -13,8 +13,8 @@ $(function () {
         messages: {
             name: "Name is required",
             sname: "Surame is required",
-            fname: "Father's name is required",
-            age: "Birthdate is required",
+            //fname: "Father's name is required",
+            //age: "Birthdate is required",
             role: "You should specify a role",
             area: "Area is required",
             town: "Town is required",
