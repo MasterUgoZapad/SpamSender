@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if(!isset($_SESSION['login']) || empty($_SESSION['login']) || !isset($_SESSION['level']) || empty($_SESSION['level']) || $_SESSION['level']<1){
+    header("location: index.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 
@@ -15,6 +20,7 @@ session_start();
         $(function () {$("#navbar").load("elements/navbar.html");});
         $(function () {$("#errorwrap").load("elements/errorwrap.html");});
         $(function () {$("#submitwrap").load("elements/submitwrap.html");});
+        $(function () {$("#instructions").load("elements/instructions.htm");});
     </script>
 </head>
 
@@ -23,7 +29,7 @@ session_start();
 <div id="errorwrap"></div>
 <div id="submitwrap"></div>
 <div class="main">
-    <h2>Welcome to Spam Sender</h2>
+    <div style="display: flex;" id="instructions"></div>
 </div>
 
 </body>

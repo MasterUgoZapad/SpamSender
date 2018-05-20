@@ -1,5 +1,17 @@
+var mass_operation_in_progress = false;
+
 function StringifyPeople(man) {
     return BlankOrValue(man["m_name"]) + ' ' + BlankOrValue(man["m_surname"]) + ' ' + BlankOrValue(man["m_fname"]);
+}
+
+function StringifyUsers(user) {
+    var login = BlankOrValue(user["m_login"]);
+    var level = user["m_level"];
+    if (level == 1)
+        return login + " User";
+    else if (level ==2)
+        return login + " Admin";
+    return login + " Undefined";
 }
 
 function StringifyGroup(group) {
@@ -28,6 +40,7 @@ function Falue(message, server_message) {
         info_message.textContent = "";
     var error = document.getElementById("wrapError");
     error.style.display = "flex";
+    HideProgress();
 }
 
 function HideFalue() {
@@ -51,6 +64,33 @@ function HideSubmit() {
         HideSubmit();
     };
     var wrap = document.getElementById("wrapSubmit");
+    wrap.style.display = "none";
+}
+
+function Progress(message, new_operation){
+    if(new_operation){
+        if (mass_operation_in_progress) {
+            Falue("Another operation in progress");
+            return false;
+        }
+        mass_operation_in_progress = true;
+    }
+    else {
+        if (!mass_operation_in_progress) {
+            Falue("Operation was cancelled");
+            return false;
+        }
+    }
+    var message_label = document.getElementById("labelOperation");
+    message_label.textContent = message;
+    var wrap = document.getElementById("progress");
+    wrap.style.display = "flex";
+    return true;
+}
+
+function HideProgress(){
+    mass_operation_in_progress = false;
+    var wrap = document.getElementById("progress");
     wrap.style.display = "none";
 }
 
@@ -312,4 +352,18 @@ function CheckResponce(response){
 
 function ResponceFailed(response){
     Falue(error_rest_failed);
+}
+
+function LogOut(){
+    $.get({
+        url: 'rest/request_handler.php?action=logout',
+        dataType: "json",
+        success: function (data) {
+            CheckResponce(data);
+            location.href = "index.php";
+        },
+        error: function(data){
+            ResponceFailed(data);
+        }
+    });
 }

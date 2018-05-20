@@ -160,33 +160,36 @@ function OnGroupSelect() {
 }
 
 function SendLetters() {
-    var data = {};
-    if (CheckIfValid(current_group_index))
-        data['group'] = current_group_index;
-    else if (CheckIfValid(current_man_index))
-        data['man'] = current_man_index;
-    else {
-        var raw_email = document.getElementById('to').value;
-        if (CheckIfValidEmail(raw_email))
-            data['mail'] = raw_email;
+    if (Progress("Sending e-mails", true)) {
+        var data = {};
+        if (CheckIfValid(current_group_index))
+            data['group'] = current_group_index;
+        else if (CheckIfValid(current_man_index))
+            data['man'] = current_man_index;
         else {
-            Falue(error_no_email_to_send);
-            return;
+            var raw_email = document.getElementById('to').value;
+            if (CheckIfValidEmail(raw_email))
+                data['mail'] = raw_email;
+            else {
+                Falue(error_no_email_to_send);
+                return;
+            }
         }
+        data['theme'] = document.getElementById('theme').value;
+        data['text'] = document.getElementById('text').value;
+        $.post({
+            dataType: "json",
+            url: "rest/request_handler.php?action=send_letters",
+            data: data,
+            success: function (data) {
+                CheckResponce(data);
+                HideProgress();
+            },
+            error: function (data) {
+                ResponceFailed(data);
+            }
+        });
     }
-    data['theme'] = document.getElementById('theme').value;
-    data['text'] = document.getElementById('text').value;
-    $.post({
-        dataType: "json",
-        url: "rest/request_handler.php?action=send_letters",
-        data: data,
-        success: function (data) {
-            CheckResponce(data);
-        },
-        error: function(data){
-            ResponceFailed(data);
-        }
-    });
 }
 
 function OnChangeEmail(){

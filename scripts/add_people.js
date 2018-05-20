@@ -61,7 +61,7 @@ function CollectManDataToObject() {
 
 function SubmitData() {
     var man = CollectManDataToObject();
-    if (current_man_index !== undefined && current_man_index != null) {
+    if (CheckIfValid(current_man_index)) {
         man['index'] = current_man_index;
         EditHuman(man);
     }

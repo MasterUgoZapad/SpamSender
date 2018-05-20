@@ -16,7 +16,7 @@
 
 		div.main {
             width: 98%;
-            margin: 110px auto;
+            margin: 10px auto;
             margin-bottom: 40px;
             z-index: 300;
             display:flex;
@@ -24,10 +24,22 @@
             justify-content:space-between;
             align-items:stretch;
         }
+
+        div.progress {
+            background-color: rgba(122, 204, 143, 0.7);
+            width: 96%;
+            margin: 10px auto;
+            z-index: 400;
+            display: none;
+            flex-direction:row;
+            justify-content:space-between;
+            align-items:stretch;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
 		div.navbar {
             overflow: hidden;
             background-color: #333;
-            position: fixed;
             top: 0;
             width: 100%;
 	    }

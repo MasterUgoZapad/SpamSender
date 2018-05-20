@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['login']) || empty($_SESSION['login']) || !isset($_SESSION['level']) || empty($_SESSION['level']) || $_SESSION['level'] < 1) {
+    header("location: index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -12,9 +21,15 @@
     <script src="elements/EN-errorstrings.js"></script>
     <script src="elements/EN-strings.js"></script>
     <script>
-        $(function () {$("#navbar").load("elements/navbar.html");});
-        $(function () {$("#errorwrap").load("elements/errorwrap.html");});
-        $(function () {$("#submitwrap").load("elements/submitwrap.html");});
+        $(function () {
+            $("#navbar").load("elements/navbar.html");
+        });
+        $(function () {
+            $("#errorwrap").load("elements/errorwrap.html");
+        });
+        $(function () {
+            $("#submitwrap").load("elements/submitwrap.html");
+        });
     </script>
 </head>
 
@@ -35,20 +50,24 @@
                 <input style="width: 98%" type="text" id="sname" name="sname"/>
                 <label>Fathers name :</label>
                 <input style="width: 98%" type="text" id="fname" name="fname"/>
-                <label>Registration year :</label>
-                <div style="display: flex; flex-direction: row;">
-                    <label>From :</label>
-                    <input type="date" id="regYearFrom" name="regYearFrom"/>
-                    <label>To :</label>
-                    <input type="date" id="regYearTo" name="regYearTo"/>
-                </div>
-                <label>Birthdate :</label>
-                <div style="display: flex; flex-direction: row;">
-                    <label>From :</label>
-                    <input type="date" id="ageFrom" name="ageFrom"/>
-                    <label>To :</label>
-                    <input type="date" id="ageTo" name="ageTo"/>
-                </div>
+                <fieldset>
+                    <legend>Registration year :</legend>
+                    <div style="display: flex; flex-direction: row;">
+                        <label>From :</label>
+                        <input type="date" id="regYearFrom" name="regYearFrom"/>
+                        <label>To :</label>
+                        <input type="date" id="regYearTo" name="regYearTo"/>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Birthdate :</legend>
+                    <div style="display: flex; flex-direction: row;">
+                        <label>From :</label>
+                        <input type="date" id="ageFrom" name="ageFrom"/>
+                        <label>To :</label>
+                        <input type="date" id="ageTo" name="ageTo"/>
+                    </div>
+                </fieldset>
                 <label>Area :</label>
                 <input style="width: 98%" type="text" id="area" name="area" list="defined_area"/>
                 <label>Town :</label>
@@ -72,9 +91,9 @@
     <div class="secondColoumn">
         <h2 align="center">Selection preview</h2>
         <div align="left">
-        <button align="right" style="margin:auto; display: block;" type="button" onclick="GetGroupBySelection()">
-            Refresh
-        </button>
+            <button align="right" style="margin:auto; display: block;" type="button" onclick="GetGroupBySelection()">
+                Refresh
+            </button>
         </div>
         <textarea class="wide_area" id="groupExplanationText" name="text"
                   rows="2" readonly></textarea>

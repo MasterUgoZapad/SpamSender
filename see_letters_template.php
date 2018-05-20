@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['login']) || empty($_SESSION['login']) || !isset($_SESSION['level']) || empty($_SESSION['level']) || $_SESSION['level']<1){
+    header("location: index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 

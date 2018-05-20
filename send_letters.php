@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['login']) || empty($_SESSION['login']) || !isset($_SESSION['level']) || empty($_SESSION['level']) || $_SESSION['level']<1){
+    header("location: index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -14,6 +23,9 @@
         $(function () {$("#navbar").load("elements/navbar.html");});
         $(function () {$("#errorwrap").load("elements/errorwrap.html");});
         $(function () {$("#submitwrap").load("elements/submitwrap.html");});
+        $(function () {
+            $("#progresswrap").load("elements/progress.html");
+        });
     </script>
 </head>
 
@@ -21,6 +33,7 @@
 <div id="navbar"></div>
 <div id="errorwrap"></div>
 <div id="submitwrap"></div>
+<div id="progresswrap"></div>
 <div id="Main" class="main" style="width:100%">
     <div class="firstColoumn" style="width:100%">
         <div style="display: flex; flex-direction: column;">
