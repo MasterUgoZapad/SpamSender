@@ -164,6 +164,10 @@ function get_value_for_aliase($field_name, $human)
             return $human->m_name;
         case "Surname":
             return $human->m_surname;
+        case "Fname":
+            return $human->m_fname;
+        case "Origin":
+            return $human->m_origin;
     }
 }
 
