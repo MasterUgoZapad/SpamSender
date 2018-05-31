@@ -1,7 +1,7 @@
 var mass_operation_in_progress = false;
 
 function StringifyPeople(man) {
-    return BlankOrValue(man["m_name"]) + ' ' + BlankOrValue(man["m_surname"]) + ' ' + BlankOrValue(man["m_fname"]);
+    return BlankOrValue(man["m_surname"]) + ' ' + BlankOrValue(man["m_name"]) + ' ' + BlankOrValue(man["m_fname"]);
 }
 
 function StringifyUsers(user) {
